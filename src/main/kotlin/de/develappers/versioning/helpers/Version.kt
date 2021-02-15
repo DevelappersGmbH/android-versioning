@@ -3,7 +3,7 @@ package de.develappers.versioning.helpers
 import java.io.File
 import java.util.*
 
-class Version(val flavorName: String?) {
+class Version(val projectDir: File, val flavorName: String?) {
 
     enum class BumpType {
         Build, Patch, Minor, Major
@@ -19,7 +19,7 @@ class Version(val flavorName: String?) {
         get() = build
 
     val file: File by lazy {
-        File("version.properties")
+        File("${projectDir.absoluteFile}/version.properties")
     }
 
     private var major: Int = 0

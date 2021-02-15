@@ -14,7 +14,7 @@ open class BumpTask: DefaultTask() {
 
     @TaskAction
     fun bump() {
-        val version = Version(flavorName)
+        val version = Version(project.projectDir, flavorName)
 
         println("Versioning: bump $bumpType of version $version")
 

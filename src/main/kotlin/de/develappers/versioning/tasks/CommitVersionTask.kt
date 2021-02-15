@@ -2,6 +2,7 @@ package de.develappers.versioning.tasks
 
 import de.develappers.versioning.helpers.Version
 import org.gradle.api.DefaultTask
+import org.gradle.api.Project
 import org.gradle.api.tasks.TaskAction
 import java.io.File
 import java.util.concurrent.TimeUnit
@@ -17,7 +18,7 @@ open class CommitVersionTask: DefaultTask() {
 
     @TaskAction
     fun commit() {
-        val version = Version(flavorName)
+        val version = Version(project.projectDir, flavorName)
 
         // Add version properties
         println("Versioning: Add version.properties to git")

@@ -11,7 +11,7 @@ class Versioning : Plugin<Project> {
     override fun apply(target: Project) {
 
         with(target) {
-            extensions.create("versioning", VersioningExtension::class.java)
+            extensions.create("versioning", VersioningExtension::class.java, projectDir)
 
             afterEvaluate {
                 extensions.findByType(com.android.build.gradle.AppExtension::class.java).let { app ->

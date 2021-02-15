@@ -16,7 +16,7 @@ open class ExportVersionTask : DefaultTask() {
 
     @TaskAction
     fun exportVersion() {
-        val version = Version(flavorName)
+        val version = Version(project.projectDir, flavorName)
         val versionName = "$version.versionName-$version.versionCode"
 
         println("Versioning: Export version name $versionName to 'version.txt'")
