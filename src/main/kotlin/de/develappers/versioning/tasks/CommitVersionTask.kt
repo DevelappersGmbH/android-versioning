@@ -22,19 +22,20 @@ open class CommitVersionTask: DefaultTask() {
 
         // Add version properties
         println("Versioning: Add version.properties to git")
-        "git add ${version.file.path}".runCommand()
+        println(listOf("git", "add", version.file.path).runCommand())
+
 
         // Commit changes
         println("Versioning: Commit changes")
-        "git commit -m \"Bumped version to $version\"".runCommand()
+        println(listOf("git", "commit", "-m", "Bumped version to $version").runCommand())
     }
 
-    fun String.runCommand(
+    fun List<String>.runCommand(
         workingDir: File = File("."),
         timeoutAmount: Long = 60,
         timeoutUnit: TimeUnit = TimeUnit.SECONDS
     ): String? = try {
-        ProcessBuilder(split("\\s".toRegex()))
+        ProcessBuilder(this)
             .directory(workingDir)
             .redirectOutput(ProcessBuilder.Redirect.PIPE)
             .redirectError(ProcessBuilder.Redirect.PIPE)
