@@ -26,10 +26,10 @@ class Versioning : Plugin<Project> {
 
     private fun createTasks(project: Project, flavorName: String) {
 
-        val flavorPart = if (flavorName.isNotEmpty()) flavorName else ""
+        val flavorPart = if (flavorName.isNotEmpty()) flavorName.capitalize() else ""
         val flavorName = if (flavorName.isNotEmpty()) flavorName else null
 
-        if (project.tasks.any { it.name == "bump$flavorPart${Version.BumpType.Build}" })
+        if (project.tasks.any { it.name == "bump${Version.BumpType.Build}$flavorPart" })
             return
 
         val bumpTypes =
@@ -37,7 +37,7 @@ class Versioning : Plugin<Project> {
 
         bumpTypes.forEach { bumpType ->
 
-            project.tasks.create("bump$flavorPart$bumpType", BumpTask::class.java) {
+            project.tasks.create("bump$bumpType$flavorPart", BumpTask::class.java) {
                 it.bumpType = bumpType
                 it.flavorName = flavorName
             }
