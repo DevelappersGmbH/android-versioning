@@ -2,11 +2,12 @@ package de.develappers.versioning.tasks
 
 import de.develappers.versioning.helpers.Version
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 import java.io.File
 
 open class ExportVersionTask : DefaultTask() {
-
+    @Input
     var flavorName: String? = null
 
     init {

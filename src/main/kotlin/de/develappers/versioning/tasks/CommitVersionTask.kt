@@ -3,12 +3,13 @@ package de.develappers.versioning.tasks
 import de.develappers.versioning.helpers.Version
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 import java.io.File
 import java.util.concurrent.TimeUnit
 
 open class CommitVersionTask: DefaultTask() {
-
+    @Input
     var flavorName: String? = null
 
     init {

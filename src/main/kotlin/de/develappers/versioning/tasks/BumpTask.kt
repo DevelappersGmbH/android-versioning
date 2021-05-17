@@ -2,10 +2,14 @@ package de.develappers.versioning.tasks
 
 import de.develappers.versioning.helpers.Version
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 
 open class BumpTask: DefaultTask() {
+    @Input
     var bumpType: Version.BumpType = Version.BumpType.Build
+
+    @Input
     var flavorName: String? = null
 
     init {
