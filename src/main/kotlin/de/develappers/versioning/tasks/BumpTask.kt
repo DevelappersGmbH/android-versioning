@@ -28,6 +28,7 @@ open class BumpTask: DefaultTask() {
         println("Versioning: version bumped to $version")
     }
 
+    @Input
     override fun getDescription(): String {
         return if (flavorName.isNullOrEmpty())
             "Applies a $bumpType bump to version"
