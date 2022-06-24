@@ -6,6 +6,7 @@ import de.develappers.versioning.tasks.CommitVersionTask
 import de.develappers.versioning.tasks.ExportVersionTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.configurationcache.extensions.capitalized
 
 class Versioning : Plugin<Project> {
     override fun apply(target: Project) {
@@ -25,9 +26,7 @@ class Versioning : Plugin<Project> {
     }
 
     private fun createTasks(project: Project, flavorName: String) {
-
-        val flavorPart = if (flavorName.isNotEmpty()) flavorName.capitalize() else ""
-        val flavorName = if (flavorName.isNotEmpty()) flavorName else null
+        val flavorPart = if (flavorName.isNotEmpty()) flavorName.capitalized() else ""
 
         if (project.tasks.any { it.name == "bump${Version.BumpType.Build}$flavorPart" })
             return
@@ -39,17 +38,17 @@ class Versioning : Plugin<Project> {
 
             project.tasks.create("bump$bumpType$flavorPart", BumpTask::class.java) {
                 it.bumpType = bumpType
-                it.flavorName = flavorName
+                it.flavorName = flavorName.ifEmpty { null }
             }
 
         }
 
         project.tasks.create("exportVersion$flavorPart", ExportVersionTask::class.java) {
-            it.flavorName = flavorName
+            it.flavorName = flavorName.ifEmpty { null }
         }
 
         project.tasks.create("commitVersion$flavorPart", CommitVersionTask::class.java) {
-            it.flavorName = flavorName
+            it.flavorName = flavorName.ifEmpty { null }
         }
     }
 }
