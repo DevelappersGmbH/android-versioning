@@ -1,10 +1,10 @@
 plugins {
-    kotlin("jvm") version "1.4.21"
+    kotlin("jvm") version "1.7.0"
 
     `java-gradle-plugin`
     `maven-publish`
 
-    id("com.gradle.plugin-publish") version "0.12.0"
+    id("com.gradle.plugin-publish") version "0.21.0"
 }
 
 group = "de.develappers"
@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.android.tools.build:gradle:4.1.0")
+    compileOnly("com.android.tools.build:gradle:7.2.1")
 }
 
 tasks {
