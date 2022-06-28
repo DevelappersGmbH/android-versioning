@@ -13,7 +13,6 @@ version = "1.2.0"
 repositories {
     google()
     mavenCentral()
-    jcenter()
 }
 
 dependencies {

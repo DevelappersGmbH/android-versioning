@@ -1,10 +1,10 @@
 package de.develappers.versioning.internal
 
 class Version(
-    val major: Int,
-    val minor: Int,
-    val patch: Int,
-    val build: Int?
+    private val major: Int,
+    private val minor: Int,
+    private val patch: Int,
+    private val build: Int?
 ) {
     companion object {
         fun next(tag: VersionGitTag): Version {
@@ -24,7 +24,9 @@ class Version(
     val versionCode: Int get() = if (build != null) {
         build + 1
     } else {
-        major * 1_000_000_000 + minor * 1_000_000 + patch * 1_000
+        // Build version code from semantic version
+        // 1.2.3 - 0 => 102003000
+        major * 100_000_000 + minor * 1_000_000 + patch * 1_000
     }
 
     override fun toString(): String {

@@ -14,7 +14,9 @@ class VersionGitTag private constructor(
 ) {
     companion object {
         fun last(project: Project, prefix: String = "android", flavorName: String? = null): VersionGitTag? {
-            // Create a list of possible filters
+            // Create a list of possible filters.
+            // Possible filters are combined by prefix and flavors with different casing
+            // because the git match parameter is case-sensitive
             val prefixes = listOf(prefix, prefix.capitalized(), prefix.uppercase())
             val flavorNames = listOfNotNull(flavorName, flavorName?.capitalized(), flavorName?.uppercase())
 
@@ -25,6 +27,7 @@ class VersionGitTag private constructor(
                     flavorNames.map { f -> "$p/$f/*" }
             }
 
+            // Search first matching tag for different filters
             for (filter in filters) {
                 val tagName = lastTagName(project, filter) ?: continue
                 return fromName(tagName)

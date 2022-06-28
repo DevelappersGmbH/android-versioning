@@ -26,9 +26,19 @@ android {
 
 ## Development
 
+### Build plugin
+
+To build the plugin you can perform the gradle task `assaemble`.
+
+### Publish plugin
+
+To publish the plugin you can perform the gradle task `publishPlugins`.
+
 ### Include local plugin
 
-For development it is useful to test the plugin without uploading it. To do this you can use a local package dependency like here: 
+For development it is useful to test the plugin without uploading it. To do this you can use a local package dependency.
+
+Just point in your project gradle, where you want to test the plugin, to your local repository:
 
 ```groovy
 buildscript{
